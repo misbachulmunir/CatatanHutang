@@ -20,6 +20,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 List<ModelCatatan>catatansaya=new ArrayList<>();
 RecyclerView recyclerView;
+RealmHelper realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +29,20 @@ RecyclerView recyclerView;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         recyclerView=findViewById(R.id.rcviewdepan);
+        realm=new RealmHelper(MainActivity.this);
 
-        //buat data dummy
-        ModelCatatan catatan1=new ModelCatatan();
-        catatan1.setId(1);
-        catatan1.setJudul("Pak Usman");
-        catatan1.setJumlah("400000");
-        catatan1.setTanggal("22-09-2020");
-        for (int i = 0; i < 20; i++) {
-            catatansaya.add(catatan1);
-        }
+//        //buat data dummy
+//        ModelCatatan catatan1=new ModelCatatan();
+//        catatan1.setId(1);
+//        catatan1.setJudul("Pak Usman");
+//        catatan1.setJumlah("400000");
+//        catatan1.setTanggal("22-09-2020");
+//        for (int i = 0; i < 20; i++) {
+//            catatansaya.add(catatan1);
+//        }
+
+        catatansaya=realm.showData();
+
         recyclerView.setAdapter(new AdapterCatatan(MainActivity.this,catatansaya));
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         recyclerView.setHasFixedSize(true);
@@ -52,5 +57,17 @@ RecyclerView recyclerView;
 //                        .setAction("Action", null).show();
             }
         });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        catatansaya=realm.showData();
+        recyclerView.setAdapter(new AdapterCatatan(MainActivity.this,catatansaya));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this,1));
     }
 }

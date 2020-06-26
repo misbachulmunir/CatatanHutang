@@ -16,11 +16,13 @@ import java.util.Locale;
 public class TambahActivity extends AppCompatActivity {
 EditText judul,jumlah,tanggal;
 Button simpan;
+RealmHelper realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //inisialisasi
         setContentView(R.layout.activity_tambah);
+        realm=new RealmHelper(TambahActivity.this);
         judul=findViewById(R.id.id_judul_tambah);
         jumlah=findViewById(R.id.id_jumlah_tambah);
         tanggal=findViewById(R.id.id_tanggal_tambah);
@@ -49,6 +51,20 @@ Button simpan;
                     }
                 },tahun,bulan,hari);
                 dialog.show();
+            }
+        });
+
+        simpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelCatatan catatan=new ModelCatatan();
+                catatan.setId((int) realm.getNextId());
+                catatan.setJudul(judul.getText().toString());
+                catatan.setJumlah(jumlah.getText().toString());
+                catatan.setTanggal(tanggal.getText().toString());
+
+                realm.insertData(catatan);
+                finish();
             }
         });
     }

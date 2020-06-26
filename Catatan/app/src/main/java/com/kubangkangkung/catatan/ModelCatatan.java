@@ -1,6 +1,10 @@
 package com.kubangkangkung.catatan;
 
-public class ModelCatatan {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class ModelCatatan extends RealmObject {
+    @PrimaryKey
     int id;
     String judul,jumlah,tanggal;
 
