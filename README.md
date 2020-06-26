@@ -1,1 +1,2 @@
 CatatanHutang
+Mengunakan database lokal
