@@ -13,9 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+
 public class AdapterCatatan extends RecyclerView.Adapter<AdapterCatatan.MyViewHolder> {
     private Context context;
     private List<ModelCatatan>data=new ArrayList<>();
+    private Realm realm;
 
     public AdapterCatatan(Context context, List<ModelCatatan> data) {
         this.context = context;
@@ -31,7 +34,7 @@ public class AdapterCatatan extends RecyclerView.Adapter<AdapterCatatan.MyViewHo
     }
     //set data
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.judul.setText(data.get(position).getJudul());
         holder.jumlah.setText("Rp "+data.get(position).getJumlah());
         holder.tanggal.setText(data.get(position).getTanggal());
@@ -39,11 +42,14 @@ public class AdapterCatatan extends RecyclerView.Adapter<AdapterCatatan.MyViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context,DetailActivity.class));
+                Intent pindah=new Intent(context,DetailActivity.class);
+                pindah.putExtra(DetailActivity.KEY_ID,data.get(position).getId());
+                context.startActivity(pindah);
             }
         });
 
     }
+
 
     @Override
     public int getItemCount() {

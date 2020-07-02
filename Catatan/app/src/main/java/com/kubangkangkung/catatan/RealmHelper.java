@@ -40,6 +40,12 @@ public class RealmHelper {
         datalList.addAll(realm.copyFromRealm(datahasil));
         return datalList;
     }
+
+    //show satu data
+    public ModelCatatan showOnedata(int id){
+        ModelCatatan data=realm.where(ModelCatatan.class).equalTo("id",id).findFirst();
+        return data;
+    }
     //mendapatkan id
     public  long getNextId(){
         if(realm.where(ModelCatatan.class).count()!=0){
@@ -48,5 +54,36 @@ public class RealmHelper {
         }else {
             return 1;
         }
+    }
+
+    //update data
+    public void updateData(ModelCatatan catatan){
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(catatan);
+        realm.commitTransaction();
+        realm.addChangeListener(new RealmChangeListener<Realm>() {
+            @Override
+            public void onChange(Realm realm) {
+                Toast.makeText(context, "Data berhasil ditambah", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        );
+
+    }
+
+    //delete data
+    public  void deleteData(Integer id){
+        realm.beginTransaction();
+        ModelCatatan catatan=realm.where(ModelCatatan.class).equalTo("id",id).findFirst();
+        catatan.deleteFromRealm();
+        realm.commitTransaction();
+        realm.addChangeListener(new RealmChangeListener<Realm>() {
+            @Override
+            public void onChange(Realm realm) {
+                Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

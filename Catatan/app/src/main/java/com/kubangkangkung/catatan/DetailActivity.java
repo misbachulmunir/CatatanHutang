@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,11 +15,15 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
+    public static final String KEY_ID ="KEY_ID" ;
     EditText judul,jumlah,tanggal;
     Button update,delete;
+    RealmHelper realm;
+    private static final String TAG = "DetailActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        realm=new RealmHelper(DetailActivity.this);
         setContentView(R.layout.activity_detail);
         judul=findViewById(R.id.id_judul_detail);
         jumlah=findViewById(R.id.id_jumlah_detail);
@@ -26,6 +31,14 @@ public class DetailActivity extends AppCompatActivity {
         update=findViewById(R.id.btnUpdate);
         delete=findViewById(R.id.btnDelete);
 
+        final int dataID =getIntent().getIntExtra(KEY_ID,0);
+        ModelCatatan data = realm.showOnedata(dataID);
+
+        judul.setText(data.getJudul());
+        jumlah.setText(data.getJumlah());
+        tanggal.setText(data.getTanggal());
+
+        Log.d(TAG, "id" +dataID);
         tanggal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +61,28 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 },tahun,bulan,hari);
                 dialog.show();
+            }
+        });
+
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                realm.deleteData(dataID);
+                finish();
+            }
+        });
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            ModelCatatan catatan=new ModelCatatan();
+            catatan.setId(dataID);
+            catatan.setJumlah(jumlah.getText().toString());
+            catatan.setJudul(judul.getText().toString());
+            catatan.setTanggal(tanggal.getText().toString());
+            realm.updateData(catatan);
+            finish();
+
             }
         });
     }
