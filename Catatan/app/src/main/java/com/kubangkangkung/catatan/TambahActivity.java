@@ -45,7 +45,7 @@ RealmHelper realm;
                         Calendar cal=Calendar.getInstance();
                         cal.set(tahun,bulan,hari);
 
-                        SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                        SimpleDateFormat dateFormat=new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
                         tanggal.setText(dateFormat.format(cal.getTime()));
 
                     }
