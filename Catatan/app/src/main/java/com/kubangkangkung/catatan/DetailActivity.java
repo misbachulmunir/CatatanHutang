@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,9 +54,9 @@ public class DetailActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar cal=Calendar.getInstance();
-                        cal.set(tahun,bulan,hari);
+                        cal.set(year,month,dayOfMonth);
 
-                        SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                        SimpleDateFormat dateFormat=new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
                         tanggal.setText(dateFormat.format(cal.getTime()));
 
                     }
@@ -69,6 +70,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 realm.deleteData(dataID);
+                Toast.makeText(DetailActivity.this, "Data berhasil di hapus", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -81,9 +83,10 @@ public class DetailActivity extends AppCompatActivity {
             catatan.setJudul(judul.getText().toString());
             catatan.setTanggal(tanggal.getText().toString());
             realm.updateData(catatan);
+                Toast.makeText(DetailActivity.this, "Data berhasil di update", Toast.LENGTH_SHORT).show();
             finish();
-
             }
+
         });
     }
 }

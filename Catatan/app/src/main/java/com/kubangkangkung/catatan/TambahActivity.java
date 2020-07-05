@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,7 +45,7 @@ RealmHelper realm;
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar cal=Calendar.getInstance();
-                        cal.set(tahun,bulan,hari);
+                        cal.set(year,month,dayOfMonth);
 
                         SimpleDateFormat dateFormat=new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
                         tanggal.setText(dateFormat.format(cal.getTime()));
@@ -62,10 +64,16 @@ RealmHelper realm;
                 catatan.setJudul(judul.getText().toString());
                 catatan.setJumlah(jumlah.getText().toString());
                 catatan.setTanggal(tanggal.getText().toString());
-
                 realm.insertData(catatan);
+                Toast.makeText(TambahActivity.this, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
+
+        //hruf kapital di awal
+        judul.setInputType(
+                InputType.TYPE_CLASS_TEXT|
+                        InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        );
     }
 }

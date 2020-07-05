@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Catatan</string>
-    <string name="title_activity_main">Catatan Saya</string>
+    <string name="title_activity_main">Pengeluaran Saya</string>
+
+    <string name="tambah">TAMBAH DATA</string>
+
+    <string name="update">UPDATE DATA</string>
+    <string name="delete">HAPUS DATA</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

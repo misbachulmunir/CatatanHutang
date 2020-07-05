@@ -27,7 +27,7 @@ public class RealmHelper {
         realm.addChangeListener(new RealmChangeListener<Realm>() {
             @Override
             public void onChange(Realm realm) {
-                Toast.makeText(context, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+          //      Toast.makeText(context, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show();
             }
         });
         realm.close();
@@ -64,11 +64,12 @@ public class RealmHelper {
         realm.addChangeListener(new RealmChangeListener<Realm>() {
             @Override
             public void onChange(Realm realm) {
-                Toast.makeText(context, "Data berhasil ditambah", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(context, "Data berhasil ditambah", Toast.LENGTH_SHORT).show();
             }
         }
 
         );
+        realm.close();
 
     }
 
@@ -81,9 +82,10 @@ public class RealmHelper {
         realm.addChangeListener(new RealmChangeListener<Realm>() {
             @Override
             public void onChange(Realm realm) {
-                Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
             }
         });
+        realm.close();
 
     }
 }

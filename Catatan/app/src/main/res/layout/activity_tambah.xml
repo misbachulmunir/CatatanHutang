@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TambahActivity">
+    tools:context=".TambahActivity"
+    >
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -55,10 +57,15 @@
             android:id="@+id/btnTambah"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#2196F3"
-            android:text="Tambah Data"
+            android:background="@drawable/button"
+            android:shadowRadius="20"
+            android:text="@string/tambah"
             android:textColor="#ECE8E8"
             android:textSize="18dp" />
+
+
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
