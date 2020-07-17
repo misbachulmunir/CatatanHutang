@@ -9,4 +9,5 @@ List Kelompok
 4. Rianti Kinasih 311710769
 5. Kristina hakim mukti  311710150
 6. Misbachul Munir 311710280
-6. Jaenal Muntaha 311710110
+7. Jaenal Muntaha 311710110
+8. Putri Nurhafenda Harun 311710092
